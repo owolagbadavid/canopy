@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="360" viewBox="0 0 480 360">
+  <rect width="480" height="360" fill="#cfd6c9"/>
+  <rect width="480" height="360" fill="url(#g)" opacity="0.25"/>
+  <defs>
+    <radialGradient id="g" cx="50%" cy="40%"><stop offset="0%" stop-color="#fff"/><stop offset="100%" stop-color="#7d8a72"/></radialGradient>
+  </defs>
+  <g fill="#5f7050">
+    <!-- regular orchard grid of tree crowns -->
+    <g>
+      <circle cx="60" cy="60" r="20"/><circle cx="130" cy="60" r="21"/><circle cx="200" cy="60" r="19"/><circle cx="270" cy="60" r="22"/><circle cx="340" cy="60" r="20"/><circle cx="410" cy="60" r="21"/>
+      <circle cx="60" cy="130" r="21"/><circle cx="130" cy="130" r="22"/><circle cx="200" cy="130" r="20"/><circle cx="270" cy="130" r="21"/><circle cx="340" cy="130" r="19"/><circle cx="410" cy="130" r="22"/>
+      <circle cx="60" cy="200" r="20"/><circle cx="130" cy="200" r="19"/><circle cx="200" cy="200" r="22"/><circle cx="270" cy="200" r="20"/><circle cx="340" cy="200" r="21"/><circle cx="410" cy="200" r="20"/>
+      <circle cx="60" cy="270" r="19"/><circle cx="130" cy="270" r="21"/><circle cx="200" cy="270" r="20"/><circle cx="270" cy="270" r="18"/><circle cx="340" cy="270" r="20"/><circle cx="410" cy="270" r="19"/>
+    </g>
+  </g>
+  <!-- a couple of stressed/missing trees -->
+  <circle cx="270" cy="270" r="18" fill="#9a8e63" opacity="0.8"/>
+  <circle cx="340" cy="270" r="9" fill="#b6a97a"/>
+  <text x="12" y="350" font-family="monospace" font-size="13" fill="#2c3324">orchard-aerial.jpg (sample input)</text>
+</svg>

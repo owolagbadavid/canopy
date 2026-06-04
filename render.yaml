@@ -1,0 +1,26 @@
+# Render Blueprint — deploys Canopy as a single full-stack web service.
+# The Node server serves the built React app AND proxies the WeatherAI API.
+services:
+  - type: web
+    name: canopy
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: WEATHER_AI_KEY
+        sync: false # set in the Render dashboard
+      - key: MONGO_URL
+        sync: false # MongoDB Atlas SRV URI (required for login)
+      - key: JWT_SECRET
+        generateValue: true # Render generates a strong secret
+      - key: NODE_ENV
+        value: production
+      - key: NODE_VERSION
+        value: "20"
+      # Optional Redis cache — set CACHE_DRIVER=redis and provide REDIS_URL to enable.
+      - key: CACHE_DRIVER
+        value: memory
+      # - key: REDIS_URL
+      #   fromService: { type: redis, name: canopy-redis, property: connectionString }

@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+/* Leaflet third-party overrides: grayscale the map tiles to match the monochrome UI. */
+.leaflet-container {
+  background: #f5f5f5;
+}
+.leaflet-tile {
+  filter: grayscale(100%);
+}
