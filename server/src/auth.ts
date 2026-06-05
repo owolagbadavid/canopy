@@ -46,6 +46,7 @@ export const requireAuth: RequestHandler = (req, res, next) => {
   const token = req.cookies?.[SESSION_COOKIE];
   const user = token ? verifySession(token) : null;
   if (!user) {
+    if (token) res.clearCookie(SESSION_COOKIE, { path: "/" });
     res.status(401).json({ error: "Authentication required." });
     return;
   }

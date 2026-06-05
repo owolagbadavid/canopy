@@ -1,5 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
-import { fetchQuota, fetchWeather, getMe, listAnalyses, logout } from "./api";
+import {
+  fetchQuota,
+  fetchWeather,
+  getMe,
+  listAnalyses,
+  logout,
+  setUnauthorizedHandler,
+} from "./api";
 import type { AnalysisHistoryItem, QuotaStats, User, WeatherModel } from "./types";
 import { LocationPicker, type Place } from "./components/LocationPicker";
 import { QuotaBadge } from "./components/QuotaBadge";
@@ -17,6 +24,7 @@ export default function App() {
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
+    setUnauthorizedHandler(() => setUser(null));
     getMe()
       .then(setUser)
       .catch(() => {});

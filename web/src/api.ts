@@ -7,9 +7,15 @@ import type {
   WeatherModel,
 } from "./types";
 
+let onUnauthorized: (() => void) | null = null;
+export function setUnauthorizedHandler(fn: () => void): void {
+  onUnauthorized = fn;
+}
+
 async function asJson<T>(res: Response): Promise<T> {
   const data = await res.json().catch(() => ({}));
   if (!res.ok) {
+    if (res.status === 401) onUnauthorized?.();
     const message = (data as { error?: string }).error || `Request failed (${res.status})`;
     const err = new Error(message) as Error & { status?: number };
     err.status = res.status;
