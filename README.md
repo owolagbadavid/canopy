@@ -4,6 +4,15 @@ A small full-stack app on the **[WeatherAI API](https://weather-ai.co/docs)** th
 weather into something an orchard grower can act on: forecast + agronomic risk flags, and a
 computer-vision tree-canopy analyzer.
 
+## Contents
+
+- [Features](#features)
+- [WeatherAI API](#weatherai-api)
+- [Architecture](#architecture)
+- [API endpoints](#api-endpoints)
+- [Run locally](#run-locally)
+- [Deploy (Render)](#deploy-render)
+
 ## Features
 
 - **Weather + 7-day forecast** for any location, with derived **agronomic risk flags** (frost,
@@ -75,16 +84,34 @@ history require the session cookie.
 
 ## Run locally
 
-**Prerequisites:** Node 20+ · a WeatherAI key (`wai_…`) · MongoDB (local or Atlas) · Redis
-(optional, only for `CACHE_DRIVER=redis`).
+**Prerequisites:** Node 20+ · a WeatherAI key (`wai_…`, from <https://weather-ai.co>) ·
+MongoDB (local or Atlas) · Redis (optional, only for `CACHE_DRIVER=redis`).
 
-```bash
-npm install
-cp .env.example server/.env     # set WEATHER_AI_KEY, MONGO_URL, JWT_SECRET
-npm run dev                     # web on :5173 (proxies /api), server on :8080
-```
+1. **Install** (npm workspaces — installs both `server` and `web`):
+   ```bash
+   git clone <repo-url> canopy && cd canopy
+   npm install
+   ```
+2. **MongoDB** — needed only for login/persistence (weather works without it). Either run one
+   locally or use a free Atlas cluster:
+   ```bash
+   docker run -d -p 27017:27017 --name canopy-mongo mongo:7   # → mongodb://localhost:27017
+   ```
+3. **Configure** the server env:
+   ```bash
+   cp .env.example server/.env
+   ```
+   Set at minimum `WEATHER_AI_KEY`; set `MONGO_URL` + `JWT_SECRET` to enable login. See
+   [Environment](#environment) for the rest.
+4. **Run** (Vite + API together):
+   ```bash
+   npm run dev          # web → http://localhost:5173 (proxies /api to the API on :8080)
+   ```
+   Open <http://localhost:5173>. Weather is usable immediately; sign in (any email) to save
+   farms and run tree analysis.
 
-Production build: `npm run build && npm start` → everything served from <http://localhost:8080>.
+**Production build** (what Render runs): `npm run build && npm start` → API + built frontend
+served together from <http://localhost:8080>.
 
 ### Environment
 
